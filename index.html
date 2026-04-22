@@ -1,1 +1,1069 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flora Nexus | Energia, Fotovoltaico e Soluzioni Elettriche</title>
+  <meta
+    name="description"
+    content="Flora Nexus è l'ecosistema elettrico di Flora: fotovoltaico, batterie, inverter, mobilità elettrica e soluzioni energetiche evolute in un'esperienza premium dal design dark e neon green."
+  />
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root{
+      --bg:#020302;
+      --bg2:#071008;
+      --panel:rgba(255,255,255,.05);
+      --panel-strong:rgba(255,255,255,.08);
+      --border:rgba(255,255,255,.10);
+      --text:#f5fff2;
+      --muted:#b8c3b6;
+      --green:#78ff32;
+      --green-2:#d6ffbf;
+      --green-3:#aaff7a;
+      --shadow:0 24px 60px rgba(0,0,0,.42);
+      --shadow-strong:0 30px 90px rgba(0,0,0,.55);
+      --radius:30px;
+      --max:1320px;
+      --header:92px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+
+    body{
+      font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 12% 18%, rgba(120,255,50,.24), transparent 24%),
+        radial-gradient(circle at 84% 14%, rgba(120,255,50,.20), transparent 22%),
+        radial-gradient(circle at 50% 85%, rgba(120,255,50,.16), transparent 30%),
+        radial-gradient(circle at 50% 45%, rgba(80,255,120,.10), transparent 28%),
+        linear-gradient(180deg, #010201 0%, #061008 38%, #020302 100%);
+      overflow-x:hidden;
+      position:relative;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+      cursor:none;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:-25%;
+      background:
+        radial-gradient(circle at 18% 28%, rgba(120,255,50,.24), transparent 20%),
+        radial-gradient(circle at 78% 20%, rgba(120,255,50,.20), transparent 18%),
+        radial-gradient(circle at 52% 72%, rgba(120,255,50,.16), transparent 22%),
+        radial-gradient(circle at 42% 48%, rgba(80,255,120,.10), transparent 18%);
+      filter:blur(105px);
+      animation:bgPulse 7s ease-in-out infinite alternate;
+      pointer-events:none;
+      z-index:0;
+      opacity:1;
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      background-image:
+        linear-gradient(rgba(120,255,50,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(120,255,50,.045) 1px, transparent 1px);
+      background-size:54px 54px;
+      mask-image:linear-gradient(180deg, rgba(0,0,0,.30), rgba(0,0,0,.78));
+      opacity:.7;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    @keyframes bgPulse{
+      0%{transform:translate3d(0,0,0) scale(1)}
+      100%{transform:translate3d(0,-24px,0) scale(1.08)}
+    }
+
+    .energy-orb{
+      position:fixed;
+      width:760px;
+      height:760px;
+      border-radius:50%;
+      background:
+        radial-gradient(circle,
+          rgba(120,255,50,.36) 0%,
+          rgba(120,255,50,.18) 22%,
+          rgba(120,255,50,.09) 42%,
+          transparent 75%);
+      filter:blur(40px);
+      pointer-events:none;
+      z-index:1;
+      mix-blend-mode:screen;
+      transform:translate(-50%, -50%);
+      transition:transform .08s linear;
+      opacity:1;
+    }
+
+    .cursor-dot{
+      position:fixed;
+      width:14px;
+      height:14px;
+      border-radius:50%;
+      background:radial-gradient(circle, #d9ffbf 0%, #78ff32 45%, rgba(120,255,50,.15) 100%);
+      box-shadow:0 0 16px rgba(120,255,50,.95), 0 0 34px rgba(120,255,50,.65), 0 0 60px rgba(120,255,50,.25);
+      transform:translate(-50%, -50%);
+      pointer-events:none;
+      z-index:999;
+    }
+
+    .cursor-ring{
+      position:fixed;
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      border:1px solid rgba(120,255,50,.45);
+      box-shadow:0 0 20px rgba(120,255,50,.15), inset 0 0 14px rgba(120,255,50,.08);
+      transform:translate(-50%, -50%);
+      pointer-events:none;
+      z-index:998;
+      transition:width .18s ease, height .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .cursor-ring.active{
+      width:64px;
+      height:64px;
+      border-color:rgba(120,255,50,.85);
+      background:rgba(120,255,50,.05);
+    }
+
+    .particles{
+      position:fixed;
+      inset:0;
+      overflow:hidden;
+      pointer-events:none;
+      z-index:1;
+    }
+
+    .particle{
+      position:absolute;
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:rgba(120,255,50,.95);
+      box-shadow:0 0 12px rgba(120,255,50,.95), 0 0 24px rgba(120,255,50,.75), 0 0 42px rgba(120,255,50,.38);
+      opacity:.78;
+      animation:floatUp linear infinite;
+    }
+
+    @keyframes floatUp{
+      0%{transform:translateY(0) scale(.8);opacity:0}
+      12%{opacity:.82}
+      100%{transform:translateY(-120vh) scale(1.25);opacity:0}
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+
+    .container{width:min(1320px, calc(100% - 34px));margin:0 auto;position:relative;z-index:2}
+
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:100;
+      height:var(--header);
+      backdrop-filter:blur(18px);
+      background:rgba(4,7,4,.72);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      box-shadow:0 12px 34px rgba(0,0,0,.28);
+    }
+
+    .nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:28px}
+
+    .brand{
+      display:flex;
+      align-items:center;
+      flex-shrink:0;
+      font-size:28px;
+      font-weight:900;
+      letter-spacing:-.06em;
+      color:#fff;
+      text-transform:uppercase;
+      text-shadow:0 0 18px rgba(120,255,50,.10);
+    }
+
+    .brand span{
+      display:inline-block;
+      margin-left:8px;
+      background:linear-gradient(180deg, #ffffff 0%, #ebffe0 42%, #8cff46 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      filter:drop-shadow(0 8px 18px rgba(120,255,50,.16));
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:24px;
+      color:var(--muted);
+      font-size:14px;
+      font-weight:600;
+      margin-left:auto;
+    }
+
+    .nav-links a{position:relative;transition:.25s ease}
+
+    .nav-links a:not(.btn)::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-7px;
+      width:0;
+      height:2px;
+      background:linear-gradient(90deg, var(--green), #ecffdf);
+      border-radius:999px;
+      box-shadow:0 0 14px rgba(120,255,50,.45);
+      transition:width .25s ease;
+    }
+
+    .nav-links a:not(.btn):hover{color:#fff;text-shadow:0 0 12px rgba(120,255,50,.18)}
+    .nav-links a:not(.btn):hover::after{width:100%}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:50px;
+      padding:0 22px;
+      border-radius:999px;
+      border:1px solid transparent;
+      font-size:14px;
+      font-weight:800;
+      letter-spacing:.02em;
+      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease, background .25s ease;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .btn::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.24) 50%, transparent 100%);
+      transform:translateX(-140%);
+      transition:transform .7s ease;
+    }
+
+    .btn:hover::before{transform:translateX(140%)}
+    .btn:hover{transform:translateY(-2px)}
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--green), #dcffca);
+      color:#071006;
+      box-shadow:0 14px 36px rgba(120,255,50,.24), 0 0 20px rgba(120,255,50,.12);
+    }
+
+    .btn-primary:hover{box-shadow:0 18px 42px rgba(120,255,50,.30), 0 0 24px rgba(120,255,50,.18)}
+
+    .btn-secondary{
+      background:rgba(255,255,255,.05);
+      border-color:rgba(255,255,255,.12);
+      color:var(--text);
+    }
+
+    .btn-secondary:hover{
+      border-color:rgba(120,255,50,.30);
+      box-shadow:0 12px 24px rgba(0,0,0,.25), 0 0 16px rgba(120,255,50,.08);
+    }
+
+    .hero{
+      min-height:calc(100vh - var(--header));
+      display:flex;
+      align-items:center;
+      padding:44px 0 52px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      right:-180px;
+      top:10px;
+      width:720px;
+      height:720px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(120,255,50,.28) 0%, rgba(120,255,50,.14) 32%, transparent 72%);
+      filter:blur(34px);
+      pointer-events:none;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      left:-140px;
+      bottom:-180px;
+      width:560px;
+      height:560px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(120,255,50,.22) 0%, rgba(120,255,50,.09) 34%, transparent 74%);
+      filter:blur(28px);
+      pointer-events:none;
+    }
+
+    .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:34px;align-items:center}
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid rgba(120,255,50,.18);
+      background:rgba(120,255,50,.07);
+      color:#eeffe8;
+      font-size:12px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-weight:800;
+      margin-bottom:24px;
+      box-shadow:0 0 24px rgba(120,255,50,.08);
+    }
+
+    .hero-title{
+      font-size:clamp(66px, 10vw, 140px);
+      line-height:.88;
+      letter-spacing:-.07em;
+      font-weight:900;
+      margin-bottom:18px;
+      color:#ffffff;
+      text-transform:uppercase;
+      text-shadow:0 10px 30px rgba(0,0,0,.30), 0 0 18px rgba(120,255,50,.10);
+    }
+
+    .hero-title span{
+      display:block;
+      background:linear-gradient(180deg, #ffffff 0%, #ebffe0 42%, #8cff46 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      filter:drop-shadow(0 10px 22px rgba(120,255,50,.18));
+    }
+
+    .hero p{max-width:720px;color:var(--muted);font-size:clamp(16px,1.8vw,21px);line-height:1.75;margin-bottom:30px}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:30px}
+
+    .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+
+    .glass{
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(14px);
+    }
+
+    .stat,.card,.contact-box,.about-card,.shop-card,.category-card{
+      border-radius:26px;
+      position:relative;
+      overflow:hidden;
+      transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    }
+
+    .stat{padding:20px}
+    .card,.contact-box,.about-card,.shop-card,.category-card{padding:28px}
+
+    .stat::before,.card::before,.contact-box::before,.about-card::before,.shop-card::before,.category-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at top left, rgba(120,255,50,.12), transparent 45%);
+      pointer-events:none;
+    }
+
+    .stat:hover,.card:hover,.contact-box:hover,.about-card:hover,.shop-card:hover,.category-card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(120,255,50,.22);
+      box-shadow:0 26px 54px rgba(0,0,0,.34), 0 0 22px rgba(120,255,50,.08);
+    }
+
+    .stat strong{display:block;font-size:28px;letter-spacing:-.05em;margin-bottom:6px;color:#fff;text-shadow:0 0 14px rgba(120,255,50,.10)}
+    .stat span,.card p,.about-card p,.shop-card p,.category-card p,.contact-box p{color:var(--muted);font-size:14px;line-height:1.7}
+
+    .hero-visual{
+      min-height:76vh;
+      border-radius:36px;
+      overflow:hidden;
+      position:relative;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:var(--shadow-strong), 0 0 40px rgba(120,255,50,.10);
+      background:
+        radial-gradient(circle at 50% 28%, rgba(120,255,50,.18), transparent 24%),
+        linear-gradient(180deg, #060806 0%, #030403 100%);
+      transition:transform .35s ease, box-shadow .35s ease;
+      transform-style:preserve-3d;
+      padding:24px;
+    }
+
+    .hero-visual::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:2;
+      pointer-events:none;
+      background:
+        linear-gradient(120deg, transparent 0%, rgba(255,255,255,.08) 35%, transparent 60%),
+        radial-gradient(circle at center, transparent 38%, rgba(0,0,0,.08) 72%, rgba(0,0,0,.22) 100%);
+      animation:shine 5.2s ease-in-out infinite;
+    }
+
+    .hero-visual::after{
+      content:"";
+      position:absolute;
+      inset:16px;
+      border-radius:28px;
+      border:1px solid rgba(120,255,50,.12);
+      pointer-events:none;
+      z-index:1;
+      box-shadow:inset 0 0 30px rgba(120,255,50,.04);
+    }
+
+    @keyframes shine{0%,100%{transform:translateX(-120%)}45%,55%{transform:translateX(120%)}}
+
+    .nexus-core{
+      position:absolute;
+      inset:50% auto auto 50%;
+      transform:translate(-50%,-50%);
+      width:min(88%,540px);
+      aspect-ratio:1/1;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      z-index:0;
+      background:
+        radial-gradient(circle, rgba(120,255,50,.18) 0%, rgba(120,255,50,.08) 28%, transparent 60%);
+      filter:drop-shadow(0 0 22px rgba(120,255,50,.18));
+    }
+
+    .ring{position:absolute;border-radius:50%;border:1px solid rgba(120,255,50,.24);box-shadow:0 0 18px rgba(120,255,50,.08), inset 0 0 18px rgba(120,255,50,.05)}
+    .ring.r1{width:84%;height:84%;animation:spin 16s linear infinite}
+    .ring.r2{width:62%;height:62%;animation:spinReverse 12s linear infinite}
+    .ring.r3{width:40%;height:40%;animation:spin 8s linear infinite}
+
+    .node{
+      position:absolute;
+      width:92px;
+      min-height:92px;
+      border-radius:22px;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      padding:12px;
+      background:rgba(8,11,8,.72);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:0 16px 30px rgba(0,0,0,.34), 0 0 20px rgba(120,255,50,.06);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#efffe7;
+      backdrop-filter:blur(10px);
+    }
+
+    .node small{display:block;color:var(--green-2);font-size:10px;letter-spacing:.12em;margin-top:6px}
+    .node.n1{top:11%;left:50%;transform:translateX(-50%)}
+    .node.n2{top:31%;right:8%}
+    .node.n3{bottom:12%;right:16%}
+    .node.n4{bottom:12%;left:16%}
+    .node.n5{top:31%;left:8%}
+
+    .center-badge{
+      width:170px;
+      height:170px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      background:radial-gradient(circle, rgba(120,255,50,.22), rgba(120,255,50,.10) 42%, rgba(8,10,8,.92) 72%);
+      border:1px solid rgba(120,255,50,.24);
+      box-shadow:0 0 30px rgba(120,255,50,.20), inset 0 0 28px rgba(120,255,50,.12);
+      font-size:15px;
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#fff;
+    }
+
+    .center-badge span{display:block;font-size:11px;letter-spacing:.18em;color:var(--green-2);margin-top:8px}
+
+    @keyframes spin{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+    @keyframes spinReverse{from{transform:translate(-50%,-50%) rotate(360deg)}to{transform:translate(-50%,-50%) rotate(0deg)}}
+
+    .hero-badge{
+      position:absolute;
+      right:22px;
+      bottom:22px;
+      z-index:5;
+      padding:14px 18px;
+      border-radius:20px;
+      background:rgba(5,8,5,.68);
+      border:1px solid rgba(255,255,255,.10);
+      backdrop-filter:blur(12px);
+      box-shadow:0 16px 34px rgba(0,0,0,.34), 0 0 16px rgba(120,255,50,.08);
+    }
+
+    .hero-badge strong{display:block;font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--green-2);margin-bottom:4px}
+    .hero-badge span{font-size:13px;color:#dce9d8}
+
+    .section{padding:100px 0;position:relative}
+    .section-head{margin-bottom:30px}
+
+    .section-head h2{
+      font-size:clamp(38px, 5vw, 72px);
+      line-height:.94;
+      letter-spacing:-.06em;
+      margin-bottom:14px;
+      font-weight:900;
+      color:#fbfff9;
+      text-shadow:0 10px 30px rgba(0,0,0,.22);
+    }
+
+    .section-head p{max-width:780px;color:var(--muted);font-size:18px;line-height:1.75}
+
+    .shop-grid,.categories-grid,.about-grid,.contact-grid{display:grid;gap:24px}
+    .shop-grid{grid-template-columns:repeat(3,1fr)}
+    .categories-grid{grid-template-columns:repeat(4,1fr)}
+    .about-grid{grid-template-columns:1.1fr .9fr}
+    .contact-grid{grid-template-columns:1fr 1fr}
+
+    .card .label,.category-card .label,.shop-card .label,.about-card .label{
+      color:var(--green-2);
+      font-size:12px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      margin-bottom:12px;
+    }
+
+    .shop-card h3,.category-card h3,.about-card h3,.contact-box h3{
+      font-size:28px;
+      letter-spacing:-.05em;
+      margin-bottom:10px;
+      color:#fff;
+    }
+
+    .shop-card ul,.about-card ul{
+      list-style:none;
+      display:grid;
+      gap:10px;
+      margin:18px 0 22px;
+    }
+
+    .shop-card li,.about-card li{
+      color:#dce8d8;
+      font-size:14px;
+      line-height:1.6;
+      padding-left:18px;
+      position:relative;
+    }
+
+    .shop-card li::before,.about-card li::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:9px;
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 12px rgba(120,255,50,.55);
+    }
+
+    .about-highlight{
+      min-height:100%;
+      display:grid;
+      align-content:space-between;
+      gap:18px;
+    }
+
+    .mini-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:8px}
+
+    .mini-stat{
+      padding:18px;
+      border-radius:22px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.10);
+    }
+
+    .mini-stat strong{display:block;font-size:24px;letter-spacing:-.05em;color:#fff;margin-bottom:6px}
+    .mini-stat span{font-size:13px;color:var(--muted);line-height:1.55}
+
+    .contact-item{
+      padding:18px;
+      border-radius:20px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.10);
+      margin-bottom:14px;
+      transition:border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+    }
+
+    .contact-item:hover{transform:translateX(4px);border-color:rgba(120,255,50,.20);box-shadow:0 14px 30px rgba(0,0,0,.22), 0 0 14px rgba(120,255,50,.05)}
+    .contact-item strong{display:block;font-size:18px;margin-bottom:6px}
+    .contact-item span{color:#d8ded8;font-size:15px;line-height:1.55}
+
+    form{display:grid;gap:14px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .field{display:grid;gap:8px}
+
+    .field label{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      color:#e2ebde;
+      font-weight:800;
+    }
+
+    .field input,.field textarea,.field select{
+      width:100%;
+      padding:16px;
+      border-radius:16px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.12);
+      color:var(--text);
+      font:inherit;
+      outline:none;
+      transition:border-color .25s ease, box-shadow .25s ease, transform .25s ease, background .25s ease;
+    }
+
+    .field textarea{min-height:150px;resize:vertical}
+    .field input:hover,.field textarea:hover,.field select:hover{border-color:rgba(120,255,50,.18)}
+    .field input:focus,.field textarea:focus,.field select:focus{
+      border-color:rgba(120,255,50,.40);
+      box-shadow:0 0 0 4px rgba(120,255,50,.08), 0 0 18px rgba(120,255,50,.10);
+      transform:translateY(-1px);
+      background:rgba(255,255,255,.07);
+    }
+
+    .footer{
+      padding:30px 0 44px;
+      border-top:1px solid rgba(255,255,255,.08);
+      color:#9ca995;
+      font-size:14px;
+      position:relative;
+      z-index:2;
+    }
+
+    .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+    .reveal{opacity:0;transform:translateY(26px) scale(.985);transition:opacity .9s ease, transform .9s ease}
+    .reveal.show{opacity:1;transform:translateY(0) scale(1)}
+    .tilt{transform-style:preserve-3d;will-change:transform}
+
+    @media (max-width:1100px){
+      .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
+      .shop-grid{grid-template-columns:1fr}
+      .categories-grid{grid-template-columns:repeat(2,1fr)}
+      .hero-visual{min-height:530px}
+    }
+
+    @media (max-width:820px){
+      :root{--header:78px}
+      body{cursor:auto}
+      .cursor-dot,.cursor-ring{display:none}
+      .nav-links{display:none}
+      .hero-stats,.grid2,.mini-stats{grid-template-columns:1fr}
+      .categories-grid{grid-template-columns:1fr}
+      .hero-visual{min-height:440px}
+      .container{width:min(var(--max), calc(100% - 22px))}
+      .section{padding:76px 0}
+      .hero-title{font-size:clamp(54px, 18vw, 92px)}
+      .section-head h2{font-size:clamp(32px, 10vw, 50px)}
+      .node{width:82px;min-height:82px;font-size:10px}
+      .center-badge{width:138px;height:138px;font-size:13px}
+    }
+  </style>
+</head>
+<body>
+  <div class="energy-orb" id="energyOrb"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <div class="particles" aria-hidden="true">
+    <span class="particle" style="left:4%; bottom:-20px; animation-duration:14s; animation-delay:0s;"></span>
+    <span class="particle" style="left:10%; bottom:-50px; animation-duration:10s; animation-delay:2s;"></span>
+    <span class="particle" style="left:16%; bottom:-28px; animation-duration:16s; animation-delay:1s;"></span>
+    <span class="particle" style="left:24%; bottom:-60px; animation-duration:12s; animation-delay:3s;"></span>
+    <span class="particle" style="left:31%; bottom:-20px; animation-duration:15s; animation-delay:2.5s;"></span>
+    <span class="particle" style="left:38%; bottom:-35px; animation-duration:11s; animation-delay:1.5s;"></span>
+    <span class="particle" style="left:45%; bottom:-15px; animation-duration:17s; animation-delay:0.5s;"></span>
+    <span class="particle" style="left:52%; bottom:-40px; animation-duration:13s; animation-delay:4s;"></span>
+    <span class="particle" style="left:59%; bottom:-18px; animation-duration:14s; animation-delay:2.8s;"></span>
+    <span class="particle" style="left:66%; bottom:-55px; animation-duration:12s; animation-delay:1.2s;"></span>
+    <span class="particle" style="left:73%; bottom:-24px; animation-duration:16s; animation-delay:2.3s;"></span>
+    <span class="particle" style="left:80%; bottom:-38px; animation-duration:11s; animation-delay:3.1s;"></span>
+    <span class="particle" style="left:87%; bottom:-14px; animation-duration:15s; animation-delay:1.6s;"></span>
+    <span class="particle" style="left:94%; bottom:-48px; animation-duration:13s; animation-delay:2.1s;"></span>
+  </div>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#top" class="brand" aria-label="Flora Nexus home">Flora <span>Nexus</span></a>
+
+      <div class="nav-links">
+        <a href="#negozio">Negozio</a>
+        <a href="#categorie">Categorie</a>
+        <a href="#chi-siamo">Chi Siamo</a>
+        <a href="#contatti">Contatti</a>
+        <a href="#contatti" class="btn btn-primary">Contattaci</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="container hero-grid">
+      <div class="reveal">
+        <div class="eyebrow">Electric Ecosystem by Flora</div>
+
+        <h1 class="hero-title">
+          Flora
+          <span>Nexus</span>
+        </h1>
+
+        <p>
+          Il nuovo ecosistema elettrico di Flora. Un hub dedicato a fotovoltaico, batterie, inverter,
+          componenti energetici e soluzioni evolute per chi cerca affidabilità, innovazione e un partner commerciale capace di connettere energia, tecnologia e futuro.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#negozio" class="btn btn-primary">Esplora il negozio</a>
+          <a href="#chi-siamo" class="btn btn-secondary">Scopri il progetto</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat glass tilt">
+            <strong>Fotovoltaico</strong>
+            <span>Pannelli, inverter, batterie e kit completi pensati per privati, installatori e aziende.</span>
+          </div>
+
+          <div class="stat glass tilt">
+            <strong>Import & trade</strong>
+            <span>Selezione prodotti, rete fornitori e commercializzazione di soluzioni elettriche ad alto potenziale.</span>
+          </div>
+
+          <div class="stat glass tilt">
+            <strong>Visione scalabile</strong>
+            <span>Un brand capace di evolvere tra energia, mobilità elettrica e nuove categorie di mercato.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal tilt">
+        <div class="nexus-core">
+          <div class="ring r1"></div>
+          <div class="ring r2"></div>
+          <div class="ring r3"></div>
+
+          <div class="node n1">Solar<small>Pannelli</small></div>
+          <div class="node n2">Power<small>Inverter</small></div>
+          <div class="node n3">Storage<small>Batterie</small></div>
+          <div class="node n4">E-Mobility<small>Future</small></div>
+          <div class="node n5">Systems<small>Componenti</small></div>
+
+          <div class="center-badge">
+            Nexus
+            <span>By Flora</span>
+          </div>
+        </div>
+
+        <div class="hero-badge">
+          <strong>New Platform</strong>
+          <span>Energia. Tecnologia. Connessione.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" id="negozio">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Un negozio pensato per vendere soluzioni</h2>
+        <p>
+          Flora Nexus nasce per offrire un'esperienza commerciale chiara, moderna e orientata al risultato: vendita di componenti singoli, kit completi e consulenza per selezionare la configurazione giusta.
+        </p>
+      </div>
+
+      <div class="shop-grid">
+        <div class="shop-card glass reveal tilt">
+          <div class="label">Kit completi</div>
+          <h3>Soluzioni pronte</h3>
+          <p>Pacchetti completi per impianti fotovoltaici residenziali e professionali, studiati per semplificare la scelta e accelerare la vendita.</p>
+          <ul>
+            <li>Kit con pannelli, inverter e batterie</li>
+            <li>Soluzioni configurabili per potenza e accumulo</li>
+            <li>Percorso d'acquisto più semplice per il cliente finale</li>
+          </ul>
+          <a href="#contatti" class="btn btn-secondary">Richiedi una proposta</a>
+        </div>
+
+        <div class="shop-card glass reveal tilt">
+          <div class="label">Prodotti singoli</div>
+          <h3>Componenti selezionati</h3>
+          <p>Catalogo dedicato a installatori, rivenditori e clienti che sanno già cosa cercano e vogliono acquistare in modo rapido e mirato.</p>
+          <ul>
+            <li>Inverter, batterie, pannelli e accessori</li>
+            <li>Descrizioni tecniche e approccio commerciale pulito</li>
+            <li>Possibilità di espansione futura del catalogo</li>
+          </ul>
+          <a href="#categorie" class="btn btn-secondary">Scopri le categorie</a>
+        </div>
+
+        <div class="shop-card glass reveal tilt">
+          <div class="label">Approccio commerciale</div>
+          <h3>Vendita assistita</h3>
+          <p>Un sito vetrina e vendita che genera contatti qualificati, facilita il preordine e supporta una relazione diretta con il cliente.</p>
+          <ul>
+            <li>Contatto rapido via form o email</li>
+            <li>Supporto commerciale su configurazioni e forniture</li>
+            <li>Impostazione pronta per crescita B2B e B2C</li>
+          </ul>
+          <a href="#contatti" class="btn btn-primary">Parla con il team</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="categorie">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Categorie principali</h2>
+        <p>
+          Flora Nexus è progettata come una piattaforma scalabile: oggi focalizzata su energia e fotovoltaico, domani pronta ad accogliere nuove linee elettriche e tecnologiche.
+        </p>
+      </div>
+
+      <div class="categories-grid">
+        <div class="category-card glass reveal tilt">
+          <div class="label">Categoria 01</div>
+          <h3>Pannelli fotovoltaici</h3>
+          <p>Moduli selezionati per impianti residenziali, commerciali e professionali, con posizionamento orientato a performance e affidabilità.</p>
+        </div>
+
+        <div class="category-card glass reveal tilt">
+          <div class="label">Categoria 02</div>
+          <h3>Inverter</h3>
+          <p>Soluzioni per conversione, gestione e ottimizzazione dell'impianto, pensate per offrire efficienza e continuità operativa.</p>
+        </div>
+
+        <div class="category-card glass reveal tilt">
+          <div class="label">Categoria 03</div>
+          <h3>Batterie e accumulo</h3>
+          <p>Sistemi storage per aumentare autonomia energetica, valorizzare l'impianto e migliorare il controllo dei consumi.</p>
+        </div>
+
+        <div class="category-card glass reveal tilt">
+          <div class="label">Categoria 04</div>
+          <h3>Kit completi</h3>
+          <p>Configurazioni già pronte per chi desidera una soluzione chiara, immediata e più facile da comprendere e acquistare.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="chi-siamo">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Chi siamo</h2>
+        <p>
+          Flora Nexus è la nuova piattaforma commerciale nata per trasformare l'esperienza di Flora in un ecosistema focalizzato su energia, componenti elettrici e sviluppo di nuove opportunità di business.
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card glass reveal tilt">
+          <div class="label">Identità</div>
+          <h3>Un brand che connette settori e visione</h3>
+          <p>
+            Flora Nexus rappresenta l'evoluzione di un marchio già riconoscibile, con un posizionamento più ampio, contemporaneo e orientato a un mercato in crescita. Non è solo un negozio: è un punto di connessione tra prodotti, persone, fornitori e nuove energie.
+          </p>
+          <ul>
+            <li>Approccio commerciale dinamico e scalabile</li>
+            <li>Focus su energia, efficienza e nuove categorie elettriche</li>
+            <li>Struttura pensata per evolvere tra B2B e B2C</li>
+            <li>Stile premium, tecnico e riconoscibile</li>
+          </ul>
+        </div>
+
+        <div class="about-highlight reveal tilt">
+          <div class="about-card glass">
+            <div class="label">Vision</div>
+            <h3>Il pianeta elettrico di Flora</h3>
+            <p>
+              Un ambiente digitale dove il cliente può trovare prodotti, kit, supporto e una direzione chiara. Flora Nexus nasce per diventare il centro operativo di tutto ciò che ruota intorno a energia, tecnologia e futuro elettrico.
+            </p>
+          </div>
+
+          <div class="mini-stats">
+            <div class="mini-stat glass">
+              <strong>Energy</strong>
+              <span>Fotovoltaico, storage, conversione e configurazioni complete.</span>
+            </div>
+            <div class="mini-stat glass">
+              <strong>Trade</strong>
+              <span>Commercializzazione di prodotti selezionati anche su più filiere.</span>
+            </div>
+            <div class="mini-stat glass">
+              <strong>Design</strong>
+              <span>Immagine premium, dark theme e identità visiva distintiva.</span>
+            </div>
+            <div class="mini-stat glass">
+              <strong>Future</strong>
+              <span>Base pronta per mobilità elettrica e nuove espansioni di gamma.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contatti">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Contatti</h2>
+        <p>
+          Per richieste commerciali, partnership, forniture, preventivi o informazioni sui prodotti Flora Nexus, il team è a disposizione.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-box glass reveal tilt">
+          <h3>Flora Nexus</h3>
+          <p>
+            Un hub commerciale dedicato a fotovoltaico, batterie, inverter, kit completi e sviluppo di nuove soluzioni elettriche.
+          </p>
+
+          <div class="contact-item">
+            <strong>Email commerciale</strong>
+            <span><a href="mailto:info@floranexus.it">info@floranexus.it</a></span>
+          </div>
+
+          <div class="contact-item">
+            <strong>Disponibilità ufficio</strong>
+            <span>Lunedì - Venerdì · 09:00 - 18:00</span>
+          </div>
+
+          <div class="contact-item">
+            <strong>Richieste gestite</strong>
+            <span>Vendita prodotti, kit completi, collaborazioni commerciali, partnership e sviluppo rete vendita.</span>
+          </div>
+        </div>
+
+        <div class="contact-box glass reveal tilt">
+          <h3>Richiedi informazioni</h3>
+          <p>Compila il form per essere ricontattato dal team Flora Nexus.</p>
+
+          <form action="mailto:info@floranexus.it" method="post" enctype="text/plain">
+            <div class="grid2">
+              <div class="field">
+                <label for="nome">Nome</label>
+                <input id="nome" type="text" name="Nome" placeholder="Il tuo nome" />
+              </div>
+
+              <div class="field">
+                <label for="cognome">Cognome</label>
+                <input id="cognome" type="text" name="Cognome" placeholder="Il tuo cognome" />
+              </div>
+            </div>
+
+            <div class="grid2">
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" type="email" name="Email" placeholder="nome@email.it" />
+              </div>
+
+              <div class="field">
+                <label for="telefono">Telefono</label>
+                <input id="telefono" type="tel" name="Telefono" placeholder="+39 ..." />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="interesse">Interesse</label>
+              <select id="interesse" name="Interesse">
+                <option>Informazioni commerciali</option>
+                <option>Richiesta preventivo</option>
+                <option>Fornitura prodotti</option>
+                <option>Partnership</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="messaggio">Messaggio</label>
+              <textarea id="messaggio" name="Messaggio" placeholder="Scrivi qui la tua richiesta..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Invia richiesta</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© Flora Nexus · Tutti i diritti riservati</div>
+      <div><a href="mailto:info@floranexus.it">info@floranexus.it</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('show');
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    const orb = document.getElementById('energyOrb');
+    const cursorDot = document.getElementById('cursorDot');
+    const cursorRing = document.getElementById('cursorRing');
+
+    window.addEventListener('mousemove', (e) => {
+      const x = e.clientX;
+      const y = e.clientY;
+      orb.style.transform = `translate(${x - 380}px, ${y - 380}px)`;
+      cursorDot.style.left = `${x}px`;
+      cursorDot.style.top = `${y}px`;
+      cursorRing.style.left = `${x}px`;
+      cursorRing.style.top = `${y}px`;
+    });
+
+    document.querySelectorAll('a, button, input, textarea, select, .tilt').forEach((el) => {
+      el.addEventListener('mouseenter', () => cursorRing.classList.add('active'));
+      el.addEventListener('mouseleave', () => cursorRing.classList.remove('active'));
+    });
+
+    const tiltItems = document.querySelectorAll('.tilt');
+    tiltItems.forEach((item) => {
+      item.addEventListener('mousemove', (e) => {
+        const rect = item.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -4;
+        const rotateY = ((x - centerX) / centerX) * 4;
+        item.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-3px)`;
+      });
+
+      item.addEventListener('mouseleave', () => {
+        item.style.transform = '';
+      });
+    });
+  </script>
+</body>
+</html>
