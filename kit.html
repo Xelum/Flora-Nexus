@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flora Nexus | Proposte Kit Fotovoltaici</title>
+  <meta
+    name="description"
+    content="Scopri le proposte Flora Nexus: Easy Kit, Mid Kit e Pro Kit con pannelli fotovoltaici, inverter e batterie di accumulo in un ecosistema premium dark con glow verde neon."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --bg:#020302;
+      --bg2:#071008;
+      --panel:rgba(255,255,255,.05);
+      --panel-strong:rgba(255,255,255,.08);
+      --border:rgba(255,255,255,.10);
+      --text:#f5fff2;
+      --muted:#b8c3b6;
+      --green:#78ff32;
+      --green-2:#d6ffbf;
+      --green-3:#aaff7a;
+      --shadow:0 24px 60px rgba(0,0,0,.42);
+      --shadow-strong:0 30px 90px rgba(0,0,0,.55);
+      --max:1320px;
+      --header:92px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+
+    body{
+      font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 12% 18%, rgba(120,255,50,.24), transparent 24%),
+        radial-gradient(circle at 84% 14%, rgba(120,255,50,.20), transparent 22%),
+        radial-gradient(circle at 50% 85%, rgba(120,255,50,.16), transparent 30%),
+        radial-gradient(circle at 50% 45%, rgba(80,255,120,.10), transparent 28%),
+        linear-gradient(180deg, #010201 0%, #061008 38%, #020302 100%);
+      overflow-x:hidden;
+      position:relative;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+      cursor:none;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:-25%;
+      background:
+        radial-gradient(circle at 18% 28%, rgba(120,255,50,.24), transparent 20%),
+        radial-gradient(circle at 78% 20%, rgba(120,255,50,.20), transparent 18%),
+        radial-gradient(circle at 52% 72%, rgba(120,255,50,.16), transparent 22%),
+        radial-gradient(circle at 42% 48%, rgba(80,255,120,.10), transparent 18%);
+      filter:blur(105px);
+      animation:bgPulse 7s ease-in-out infinite alternate;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      background-image:
+        linear-gradient(rgba(120,255,50,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(120,255,50,.045) 1px, transparent 1px);
+      background-size:54px 54px;
+      mask-image:linear-gradient(180deg, rgba(0,0,0,.30), rgba(0,0,0,.78));
+      opacity:.7;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    @keyframes bgPulse{
+      0%{transform:translate3d(0,0,0) scale(1)}
+      100%{transform:translate3d(0,-24px,0) scale(1.08)}
+    }
+
+    .energy-orb{
+      position:fixed;
+      width:760px;
+      height:760px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(120,255,50,.36) 0%, rgba(120,255,50,.18) 22%, rgba(120,255,50,.09) 42%, transparent 75%);
+      filter:blur(40px);
+      pointer-events:none;
+      z-index:1;
+      mix-blend-mode:screen;
+      transform:translate(-50%, -50%);
+      transition:transform .08s linear;
+      opacity:1;
+    }
+
+    .cursor-dot{
+      position:fixed;
+      width:14px;
+      height:14px;
+      border-radius:50%;
+      background:radial-gradient(circle, #d9ffbf 0%, #78ff32 45%, rgba(120,255,50,.15) 100%);
+      box-shadow:0 0 16px rgba(120,255,50,.95), 0 0 34px rgba(120,255,50,.65), 0 0 60px rgba(120,255,50,.25);
+      transform:translate(-50%, -50%);
+      pointer-events:none;
+      z-index:999;
+    }
+
+    .cursor-ring{
+      position:fixed;
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      border:1px solid rgba(120,255,50,.45);
+      box-shadow:0 0 20px rgba(120,255,50,.15), inset 0 0 14px rgba(120,255,50,.08);
+      transform:translate(-50%, -50%);
+      pointer-events:none;
+      z-index:998;
+      transition:width .18s ease, height .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .cursor-ring.active{width:64px;height:64px;border-color:rgba(120,255,50,.85);background:rgba(120,255,50,.05)}
+
+    .particles{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:1}
+    .particle{
+      position:absolute;width:6px;height:6px;border-radius:50%;background:rgba(120,255,50,.95);
+      box-shadow:0 0 12px rgba(120,255,50,.95),0 0 24px rgba(120,255,50,.75),0 0 42px rgba(120,255,50,.38);
+      opacity:.78;animation:floatUp linear infinite;
+    }
+    @keyframes floatUp{0%{transform:translateY(0) scale(.8);opacity:0}12%{opacity:.82}100%{transform:translateY(-120vh) scale(1.25);opacity:0}}
+
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1320px, calc(100% - 34px));margin:0 auto;position:relative;z-index:2}
+
+    .nav{
+      position:sticky;top:0;z-index:100;height:var(--header);backdrop-filter:blur(18px);
+      background:rgba(4,7,4,.72);border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 12px 34px rgba(0,0,0,.28);
+    }
+    .nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:28px}
+    .brand{
+      display:flex;align-items:center;flex-shrink:0;font-size:28px;font-weight:900;letter-spacing:-.06em;
+      color:#fff;text-transform:uppercase;text-shadow:0 0 18px rgba(120,255,50,.10);
+    }
+    .brand span{
+      display:inline-block;margin-left:8px;background:linear-gradient(180deg, #ffffff 0%, #ebffe0 42%, #8cff46 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 8px 18px rgba(120,255,50,.16));
+    }
+    .nav-links{display:flex;align-items:center;gap:24px;color:var(--muted);font-size:14px;font-weight:600;margin-left:auto}
+    .nav-links a{position:relative;transition:.25s ease}
+    .nav-links a:not(.btn)::after{
+      content:"";position:absolute;left:0;bottom:-7px;width:0;height:2px;background:linear-gradient(90deg, var(--green), #ecffdf);
+      border-radius:999px;box-shadow:0 0 14px rgba(120,255,50,.45);transition:width .25s ease;
+    }
+    .nav-links a:not(.btn):hover{color:#fff;text-shadow:0 0 12px rgba(120,255,50,.18)}
+    .nav-links a:not(.btn):hover::after{width:100%}
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 22px;border-radius:999px;
+      border:1px solid transparent;font-size:14px;font-weight:800;letter-spacing:.02em;transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease, background .25s ease;position:relative;overflow:hidden;
+    }
+    .btn::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.24) 50%, transparent 100%);transform:translateX(-140%);transition:transform .7s ease}
+    .btn:hover::before{transform:translateX(140%)}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:linear-gradient(135deg, var(--green), #dcffca);color:#071006;box-shadow:0 14px 36px rgba(120,255,50,.24), 0 0 20px rgba(120,255,50,.12)}
+    .btn-primary:hover{box-shadow:0 18px 42px rgba(120,255,50,.30), 0 0 24px rgba(120,255,50,.18)}
+    .btn-secondary{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);color:var(--text)}
+    .btn-secondary:hover{border-color:rgba(120,255,50,.30);box-shadow:0 12px 24px rgba(0,0,0,.25), 0 0 16px rgba(120,255,50,.08)}
+
+    .hero{padding:72px 0 40px;position:relative;overflow:hidden}
+    .hero::before{
+      content:"";position:absolute;right:-180px;top:-40px;width:720px;height:720px;border-radius:50%;
+      background:radial-gradient(circle, rgba(120,255,50,.28) 0%, rgba(120,255,50,.14) 32%, transparent 72%);filter:blur(34px);pointer-events:none;
+    }
+
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;border:1px solid rgba(120,255,50,.18);
+      background:rgba(120,255,50,.07);color:#eeffe8;font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;margin-bottom:24px;box-shadow:0 0 24px rgba(120,255,50,.08);
+    }
+    .hero-title{
+      font-size:clamp(54px, 8vw, 108px);line-height:.9;letter-spacing:-.07em;font-weight:900;margin-bottom:18px;color:#ffffff;
+      text-transform:uppercase;text-shadow:0 10px 30px rgba(0,0,0,.30), 0 0 18px rgba(120,255,50,.10);
+      max-width:980px;
+    }
+    .hero-title span{
+      display:block;background:linear-gradient(180deg, #ffffff 0%, #ebffe0 42%, #8cff46 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 10px 22px rgba(120,255,50,.18));
+    }
+    .hero p{max-width:860px;color:var(--muted);font-size:clamp(16px,1.8vw,21px);line-height:1.75;margin-bottom:30px}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:14px}
+
+    .section{padding:60px 0 100px;position:relative}
+    .section-head{margin-bottom:30px}
+    .section-head h2{
+      font-size:clamp(38px, 5vw, 72px);line-height:.94;letter-spacing:-.06em;margin-bottom:14px;font-weight:900;color:#fbfff9;text-shadow:0 10px 30px rgba(0,0,0,.22);
+    }
+    .section-head p{max-width:780px;color:var(--muted);font-size:18px;line-height:1.75}
+
+    .kits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .kit-card{
+      border-radius:30px;position:relative;overflow:hidden;padding:30px;background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.10);box-shadow:0 24px 60px rgba(0,0,0,.42);backdrop-filter:blur(14px);transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    }
+    .kit-card::before{
+      content:"";position:absolute;inset:0;background:radial-gradient(circle at top left, rgba(120,255,50,.14), transparent 42%);pointer-events:none;
+    }
+    .kit-card:hover{transform:translateY(-8px);border-color:rgba(120,255,50,.22);box-shadow:0 30px 70px rgba(0,0,0,.44), 0 0 24px rgba(120,255,50,.10)}
+
+    .kit-badge{
+      display:inline-flex;align-items:center;padding:9px 14px;border-radius:999px;background:rgba(120,255,50,.08);
+      border:1px solid rgba(120,255,50,.18);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#efffe7;margin-bottom:18px;
+    }
+    .kit-card h3{font-size:42px;line-height:.95;letter-spacing:-.06em;margin-bottom:12px;color:#fff}
+    .kit-sub{color:var(--green-2);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px}
+    .kit-desc{color:#d9e6d5;font-size:15px;line-height:1.75;margin-bottom:18px}
+    .kit-list{list-style:none;display:grid;gap:12px;margin-bottom:24px}
+    .kit-list li{position:relative;padding-left:18px;color:#dce8d8;font-size:15px;line-height:1.7}
+    .kit-list li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 12px rgba(120,255,50,.55)}
+    .price-box{
+      margin:24px 0 22px;padding:18px 20px;border-radius:22px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);
+      box-shadow:inset 0 0 20px rgba(120,255,50,.03);
+    }
+    .price-label{display:block;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--green-2);margin-bottom:8px}
+    .price-value{display:block;font-size:34px;font-weight:900;letter-spacing:-.06em;color:#fff}
+    .price-note{display:block;font-size:13px;color:var(--muted);margin-top:6px}
+
+    .details-toggle{width:100%;margin-top:6px}
+    .details{
+      margin-top:16px;padding:18px;border-radius:22px;background:rgba(4,7,4,.58);border:1px solid rgba(255,255,255,.10);
+      display:none;
+    }
+    .details.open{display:block;animation:fadeDown .28s ease}
+    @keyframes fadeDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
+    .details h4{font-size:16px;font-weight:800;letter-spacing:.04em;color:#fff;margin-bottom:12px}
+    .details-grid{display:grid;gap:12px}
+    .detail-item{
+      padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+    }
+    .detail-item strong{display:block;font-size:14px;color:#fff;margin-bottom:4px}
+    .detail-item span{font-size:14px;color:#cfdacc;line-height:1.6}
+
+    .bottom-box{
+      margin-top:34px;padding:26px 28px;border-radius:28px;background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.10);box-shadow:0 24px 60px rgba(0,0,0,.42);backdrop-filter:blur(14px);
+    }
+    .bottom-box h3{font-size:32px;letter-spacing:-.05em;margin-bottom:10px;color:#fff}
+    .bottom-box p{max-width:860px;color:var(--muted);font-size:16px;line-height:1.8;margin-bottom:18px}
+
+    .footer{padding:30px 0 44px;border-top:1px solid rgba(255,255,255,.08);color:#9ca995;font-size:14px;position:relative;z-index:2}
+    .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+    .reveal{opacity:0;transform:translateY(26px) scale(.985);transition:opacity .9s ease, transform .9s ease}
+    .reveal.show{opacity:1;transform:translateY(0) scale(1)}
+    .tilt{transform-style:preserve-3d;will-change:transform}
+
+    @media (max-width:1100px){
+      .kits-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:820px){
+      :root{--header:78px}
+      body{cursor:auto}
+      .cursor-dot,.cursor-ring{display:none}
+      .nav-links{display:none}
+      .container{width:min(var(--max), calc(100% - 22px))}
+      .section{padding:54px 0 76px}
+      .hero{padding:54px 0 24px}
+      .hero-title{font-size:clamp(44px, 16vw, 82px)}
+      .section-head h2{font-size:clamp(32px, 10vw, 50px)}
+      .price-value{font-size:28px}
+      .kit-card h3{font-size:34px}
+    }
+  </style>
+</head>
+<body>
+  <div class="energy-orb" id="energyOrb"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <div class="particles" aria-hidden="true">
+    <span class="particle" style="left:4%; bottom:-20px; animation-duration:14s; animation-delay:0s;"></span>
+    <span class="particle" style="left:10%; bottom:-50px; animation-duration:10s; animation-delay:2s;"></span>
+    <span class="particle" style="left:16%; bottom:-28px; animation-duration:16s; animation-delay:1s;"></span>
+    <span class="particle" style="left:24%; bottom:-60px; animation-duration:12s; animation-delay:3s;"></span>
+    <span class="particle" style="left:31%; bottom:-20px; animation-duration:15s; animation-delay:2.5s;"></span>
+    <span class="particle" style="left:38%; bottom:-35px; animation-duration:11s; animation-delay:1.5s;"></span>
+    <span class="particle" style="left:45%; bottom:-15px; animation-duration:17s; animation-delay:0.5s;"></span>
+    <span class="particle" style="left:52%; bottom:-40px; animation-duration:13s; animation-delay:4s;"></span>
+    <span class="particle" style="left:59%; bottom:-18px; animation-duration:14s; animation-delay:2.8s;"></span>
+    <span class="particle" style="left:66%; bottom:-55px; animation-duration:12s; animation-delay:1.2s;"></span>
+    <span class="particle" style="left:73%; bottom:-24px; animation-duration:16s; animation-delay:2.3s;"></span>
+    <span class="particle" style="left:80%; bottom:-38px; animation-duration:11s; animation-delay:3.1s;"></span>
+    <span class="particle" style="left:87%; bottom:-14px; animation-duration:15s; animation-delay:1.6s;"></span>
+    <span class="particle" style="left:94%; bottom:-48px; animation-duration:13s; animation-delay:2.1s;"></span>
+  </div>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand" aria-label="Flora Nexus home">Flora <span>Nexus</span></a>
+      <div class="nav-links">
+        <a href="index.html#negozio">Negozio</a>
+        <a href="index.html#categorie">Categorie</a>
+        <a href="index.html#chi-siamo">Chi Siamo</a>
+        <a href="index.html#contatti">Contatti</a>
+        <a href="index.html#contatti" class="btn btn-primary">Contattaci</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container reveal">
+      <div class="eyebrow">Flora Nexus Kit Selection</div>
+      <h1 class="hero-title">Le nostre <span>proposte kit</span></h1>
+      <p>
+        Tre configurazioni pensate per offrire una base chiara, immediata e commercialmente efficace. Ogni proposta include pannelli fotovoltaici, inverter e batterie di accumulo, con possibilità di approfondire i dettagli dei singoli componenti.
+      </p>
+      <div class="hero-actions">
+        <a href="#kits" class="btn btn-primary">Scopri i kit</a>
+        <a href="index.html#contatti" class="btn btn-secondary">Richiedi informazioni</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" id="kits">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Tre livelli, una sola visione</h2>
+        <p>
+          Dalla soluzione essenziale fino alla configurazione più completa, Flora Nexus propone kit fotovoltaici studiati per rispondere a esigenze diverse mantenendo una comunicazione chiara, elegante e professionale.
+        </p>
+      </div>
+
+      <div class="kits-grid">
+        <article class="kit-card reveal tilt">
+          <div class="kit-badge">Easy Kit</div>
+          <h3>Easy Kit</h3>
+          <div class="kit-sub">Soluzione entry level</div>
+          <p class="kit-desc">Pensato per chi desidera una configurazione essenziale ma già completa, con accumulo e una potenza ideale per iniziare a costruire autonomia energetica.</p>
+          <ul class="kit-list">
+            <li>8 pannelli fotovoltaici da 440 W ciascuno</li>
+            <li>Potenza totale impianto: 3,52 kW</li>
+            <li>Inverter da 3,6 kW</li>
+            <li>1 batteria di accumulo da 5,00 kW</li>
+          </ul>
+          <div class="price-box">
+            <span class="price-label">Prezzo proposta</span>
+            <span class="price-value">Euro 4.500,00</span>
+            <span class="price-note">Iva esclusa</span>
+          </div>
+          <button class="btn btn-secondary details-toggle" data-target="easy-details">Vedi i dettagli dei prodotti</button>
+          <div class="details" id="easy-details">
+            <h4>Dettagli prodotti</h4>
+            <div class="details-grid">
+              <div class="detail-item">
+                <strong>Pannelli fotovoltaici</strong>
+                <span>8 moduli da 440 W ad alta efficienza, pensati per offrire affidabilità, buona resa e un ottimo equilibrio tra potenza installata e spazio occupato.</span>
+              </div>
+              <div class="detail-item">
+                <strong>Inverter</strong>
+                <span>Inverter da 3,6 kW adatto a impianti residenziali di taglio medio-piccolo, con gestione efficiente della conversione energetica.</span>
+              </div>
+              <div class="detail-item">
+                <strong>Batteria di accumulo</strong>
+                <span>1 unità da 5,00 kW per aumentare l'autoconsumo e migliorare la gestione dell'energia prodotta durante la giornata.</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="kit-card reveal tilt">
+          <div class="kit-badge">Mid Kit</div>
+          <h3>Mid Kit</h3>
+          <div class="kit-sub">Configurazione bilanciata</div>
+          <p class="kit-desc">Una proposta più evoluta, pensata per chi vuole maggiore produzione, una capacità di accumulo superiore e una configurazione più performante per consumi energetici più importanti.</p>
+          <ul class="kit-list">
+            <li>14 pannelli fotovoltaici da 440 W ciascuno</li>
+            <li>Potenza totale impianto: 6,16 kW</li>
+            <li>Inverter da 6,00 kW</li>
+            <li>2 batterie di accumulo da 5,00 kW ciascuna</li>
+            <li>Capacità totale accumulo: 10,00 kW</li>
+          </ul>
+          <div class="price-box">
+            <span class="price-label">Prezzo proposta</span>
+            <span class="price-value">Euro 6.500,00</span>
+            <span class="price-note">Iva esclusa</span>
+          </div>
+          <button class="btn btn-secondary details-toggle" data-target="mid-details">Vedi i dettagli dei prodotti</button>
+          <div class="details" id="mid-details">
+            <h4>Dettagli prodotti</h4>
+            <div class="details-grid">
+              <div class="detail-item">
+                <strong>Pannelli fotovoltaici</strong>
+                <span>14 moduli da 440 W selezionati per costruire un impianto residenziale o small business con una produzione più consistente e competitiva.</span>
+              </div>
+              <div class="detail-item">
+                <strong>Inverter</strong>
+                <span>Inverter da 6,00 kW progettato per gestire in modo stabile la maggiore potenza installata, con un approccio orientato a continuità e rendimento.</span>
+              </div>
+              <div class="detail-item">
+                <strong>Batterie di accumulo</strong>
+                <span>2 batterie da 5,00 kW ciascuna per un totale di 10,00 kW, ideali per aumentare autonomia, flessibilità e valorizzazione dell'energia prodotta.</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="kit-card reveal tilt">
+          <div class="kit-badge">Pro Kit</div>
+          <h3>Pro Kit</h3>
+          <div class="kit-sub">Massima configurazione</div>
+          <p class="kit-desc">La proposta più completa della gamma, pensata per chi desidera una struttura ad alta capacità, con maggiore potenza installata e un sistema di accumulo in grado di sostenere esigenze energetiche superiori.</p>
+          <ul class="kit-list">
+            <li>24 pannelli fotovoltaici da 440 W ciascuno</li>
+            <li>Potenza totale impianto: 10,56 kW</li>
+            <li>Inverter da 10,00 kW</li>
+            <li>3 batterie di accumulo da 5,00 kW ciascuna</li>
+            <li>Capacità totale accumulo: 15,00 kW</li>
+          </ul>
+          <div class="price-box">
+            <span class="price-label">Prezzo proposta</span>
+            <span class="price-value">Euro 9.000,00</span>
+            <span class="price-note">Iva esclusa</span>
+          </div>
+          <button class="btn btn-secondary details-toggle" data-target="pro-details">Vedi i dettagli dei prodotti</button>
+          <div class="details" id="pro-details">
+            <h4>Dettagli prodotti</h4>
+            <div class="details-grid">
+              <div class="detail-item">
+                <strong>Pannelli fotovoltaici</strong>
+                <span>24 moduli da 440 W per una configurazione di fascia alta, ideale per chi cerca una produzione importante e una base tecnica solida e ben dimensionata.</span>
+              </div>
+              <div class="detail-item">
+                <strong>Inverter</strong>
+                <span>Inverter da 10,00 kW adatto a impianti più strutturati, con capacità di gestione coerente con il livello di potenza installata.</span>
+              </div>
+              <div class="detail-item">
+                <strong>Batterie di accumulo</strong>
+                <span>3 batterie da 5,00 kW ciascuna, per un totale di 15,00 kW, dedicate a una strategia energetica più evoluta e orientata alla massima autonomia.</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="bottom-box reveal">
+        <h3>Vuoi una configurazione personalizzata?</h3>
+        <p>
+          Queste proposte rappresentano tre basi commerciali già pronte. In funzione di consumi, spazi disponibili, obiettivi di accumulo o preferenze tecniche, Flora Nexus può sviluppare una proposta su misura più coerente con il profilo del cliente.
+        </p>
+        <a href="index.html#contatti" class="btn btn-primary">Richiedi una proposta personalizzata</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© Flora Nexus · Tutti i diritti riservati</div>
+      <div><a href="mailto:info@floranexus.it">info@floranexus.it</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('show');
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    const orb = document.getElementById('energyOrb');
+    const cursorDot = document.getElementById('cursorDot');
+    const cursorRing = document.getElementById('cursorRing');
+
+    window.addEventListener('mousemove', (e) => {
+      const x = e.clientX;
+      const y = e.clientY;
+      orb.style.transform = `translate(${x - 380}px, ${y - 380}px)`;
+      cursorDot.style.left = `${x}px`;
+      cursorDot.style.top = `${y}px`;
+      cursorRing.style.left = `${x}px`;
+      cursorRing.style.top = `${y}px`;
+    });
+
+    document.querySelectorAll('a, button, .tilt').forEach((el) => {
+      el.addEventListener('mouseenter', () => cursorRing.classList.add('active'));
+      el.addEventListener('mouseleave', () => cursorRing.classList.remove('active'));
+    });
+
+    const tiltItems = document.querySelectorAll('.tilt');
+    tiltItems.forEach((item) => {
+      item.addEventListener('mousemove', (e) => {
+        const rect = item.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -4;
+        const rotateY = ((x - centerX) / centerX) * 4;
+        item.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-3px)`;
+      });
+      item.addEventListener('mouseleave', () => { item.style.transform = ''; });
+    });
+
+    document.querySelectorAll('.details-toggle').forEach((button) => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-target');
+        const details = document.getElementById(targetId);
+        details.classList.toggle('open');
+        button.textContent = details.classList.contains('open')
+          ? 'Nascondi i dettagli dei prodotti'
+          : 'Vedi i dettagli dei prodotti';
+      });
+    });
+  </script>
+</body>
+</html>
